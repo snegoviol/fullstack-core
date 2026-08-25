@@ -1,7 +1,12 @@
+# ==================================================================================================
+
 [workspace]
-authors = ["Sierra Arn"]
+authors = ["Sierra-Arn <unweariedheart@gmail.com>"]
 name = "fullstack-core"
 version = "1.0.0"
+license = "Apache-2.0"
+repository = "https://github.com/Sierra-Arn/fullstack-core"
+
 channels = ["nvidia", "conda-forge"]
 platforms = [
     { name = "linux-64", platform = "linux-64" },
@@ -9,7 +14,7 @@ platforms = [
 ]
 requires-pixi = ">=0.71.1"
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.cuda]
 platforms = ["linux-64-cuda"]
@@ -17,7 +22,7 @@ platforms = ["linux-64-cuda"]
 [feature.cpu-only]
 platforms = ["linux-64"]
 
-# =============================================================================
+# ==================================================================================================
 
 [dependencies]
 python = ">=3.12.13,<3.15"
@@ -32,7 +37,7 @@ scripts = { path = "./packages/scripts/", editable = true }
 
 setup = { cmd = "pixi install --all && bun install"}
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.shared-pkg.dependencies]
 python = ">=3.12.13,<3.15"
@@ -48,7 +53,7 @@ celery = ">=5.5.3,<6"
 [feature.shared-pkg.pypi-dependencies]
 shared = { path = "./packages/shared/", editable = true }
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.services-pkg.dependencies]
 bcrypt = ">=5.0.0,<6"
@@ -56,7 +61,7 @@ bcrypt = ">=5.0.0,<6"
 [feature.services-pkg.pypi-dependencies]
 services = { path = "./packages/services/", editable = true }
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.server-pkg.dependencies]
 python-fasthtml = ">=0.14.3,<0.15"
@@ -66,7 +71,7 @@ python-json-logger = ">=4.1.0,<5"
 [feature.server-pkg.pypi-dependencies]
 server = { path = "./packages/server/", editable = true }
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.worker-inference-pkg.dependencies]
 cuda-toolkit = ">=12.8.2,<13"
@@ -77,12 +82,12 @@ accelerate = ">=1.14.0,<2"
 [feature.worker-inference-pkg.pypi-dependencies]
 worker-inference = { path = "./packages/worker-inference/", editable = true }
 
-# =============================================================================
+# ==================================================================================================
 
 [feature.worker-maintenance-pkg.pypi-dependencies]
 worker-maintenance = { path = "./packages/worker-maintenance/", editable = true }
 
-# =============================================================================
+# ==================================================================================================
 
 [environments.default]
 features = ["cpu-only", "default"]
@@ -122,3 +127,5 @@ features = [
     "worker-maintenance-pkg"
 ]
 no-default-feature = true
+
+# ==================================================================================================
