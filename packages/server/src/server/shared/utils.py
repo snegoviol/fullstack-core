@@ -1,23 +1,23 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/utils.py
+# ==================================================================================================
+
 from math import ceil
 from starlette import status
 from starlette.responses import HTMLResponse
 from fasthtml.common import to_xml, Img, FT
 
+# ==================================================================================================
 
 def html_response(content: FT, status_code: int = status.HTTP_200_OK) -> HTMLResponse:
     """
@@ -37,11 +37,11 @@ def html_response(content: FT, status_code: int = status.HTTP_200_OK) -> HTMLRes
     """
     return HTMLResponse(content=to_xml(content), status_code=status_code)
 
+# ==================================================================================================
 
 def create_icon(
     name: str,
     size: int = 24,
-    *,
     cls: str = "",
 ) -> FT:
     """
@@ -77,6 +77,7 @@ def create_icon(
         cls=cls,
     )
 
+# ==================================================================================================
 
 def calculate_pagination(
     total: int,
@@ -113,3 +114,5 @@ def calculate_pagination(
     skip = (current_page - 1) * page_size
 
     return skip, total_pages, current_page
+
+# ==================================================================================================

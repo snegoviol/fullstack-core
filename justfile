@@ -1,39 +1,39 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
+# ==================================================================================================
+#
+# Copyright (c) 2026 Ilya Snegov
+#
+# Dedicated to the public domain under the Creative Commons
+# CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+# You may obtain a copy of the Dedication at
+#
+# https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+# 
+# Originally from Human Pose Estimation Service 
+# (https://github.com/snegoviol/pose-estimation-service)
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
+# justfile
+# ==================================================================================================
 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Human Pose Estimation Service
-# https://github.com/Sierra-Arn/pose-estimation-service
-# Modified for Full-Stack Core
-
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Justfile Settings
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 set dotenv-load := true
 set export := true
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Environment Mappings: justfile variable -> pixi environment
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 ENV_DEFAULT      := "pixi run -e default"
 ENV_SERVER       := "pixi run -e server"
 ENV_WORKER_INF   := "pixi run -e worker-inference"
 ENV_WORKER_MAIN  := "pixi run -e worker-maintenance"
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Scripts
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 # Generate .env from template with secure random passwords
 gen-env:
@@ -59,9 +59,9 @@ build-js:
 build-icons:
     cp node_modules/heroicons/24/outline/*.svg packages/server/static/icons/outline/
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Infrastructure
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 # Generate new revision
 db-revision message='New migration':
@@ -79,9 +79,9 @@ db-migrate:
 db-rollback:
     {{ENV_SERVER}} alembic -c ./migrations/alembic.ini downgrade -1
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Runtime
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 # Start Celery worker for ML inference
 worker-inference:
@@ -99,9 +99,9 @@ worker-beat:
 server:
     {{ENV_SERVER}} python -m server.main
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Docker Local
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 # Start infrastructure stack to be consumed by locally running services
 docker-up:
@@ -115,10 +115,12 @@ docker-down:
 docker-logs:
     {{ENV_DEFAULT}} docker compose -f docker-compose.yml logs -f
 
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 # Quick Start
-# =============================================================================
+# --------------------------------------------------------------------------------------------------
 
 # Start full local development environment and open Swagger in browser
 quick-start:
     {{ENV_DEFAULT}} python -m scripts.quick_start
+
+# ==================================================================================================

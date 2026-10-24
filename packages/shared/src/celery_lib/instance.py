@@ -1,51 +1,71 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Human Pose Estimation Service
-# https://github.com/Sierra-Arn/pose-estimation-service
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Human Pose Estimation Service 
+# (https://github.com/snegoviol/pose-estimation-service).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/celery_lib/instance.py
+# ==================================================================================================
+
 from kombu import Exchange, Queue
 from celery import Celery
 from celery.schedules import crontab
 from redis_lib import redis_config
 from .config import celery_config
 
+# ==================================================================================================
 
 tasks_exchange = Exchange(
     celery_config.exchange_name,
     type=celery_config._exchange_type,
 )
+"""
+Celery exchange used to route tasks to their respective queues.
+"""
+
+# ==================================================================================================
 
 inference_queue = Queue(
     celery_config.queue_name_inference,
     exchange=tasks_exchange,
     routing_key=celery_config.queue_name_inference,
 )
+"""
+Queue for AI inference tasks, routed via the shared exchange.
+"""
+
+# ==================================================================================================
 
 maintenance_queue = Queue(
     celery_config.queue_name_maintenance,
     exchange=tasks_exchange,
     routing_key=celery_config.queue_name_maintenance,
 )
+"""
+Queue for maintenance and scheduled tasks, routed via the shared exchange.
+"""
+
+# ==================================================================================================
 
 celery_app = Celery(
     celery_config.app_name,
     broker=redis_config.broker_url,
     backend=redis_config.result_backend_url,
 )
+"""
+Celery application instance configured with Redis as both message broker and result backend.
+"""
+
+# ==================================================================================================
 
 celery_app.conf.update(
     task_serializer=celery_config._task_serializer,
@@ -68,3 +88,8 @@ celery_app.conf.update(
         },
     },
 )
+"""
+Celery application configuration: serialization policies, timezone settings, task routing, and periodic schedules.
+"""
+
+# ==================================================================================================

@@ -1,6 +1,26 @@
+<!--    
+    ================================================================================================
+    
+    Copyright (c) 2026 Ilya Snegov
+    
+    Dedicated to the public domain under the Creative Commons
+    CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+    You may obtain a copy of the Dedication at
+    
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+    ================================================================================================
+    docs/02-project-structure.md
+    ================================================================================================
+-->
+
 # II. Project Structure
 
 > *This document describes the logical organization of the project codebase as a Python monorepo. Each package follows the standard `src/` layout for clean imports, independent packaging, and reproducible builds via Pixi.*
+
+<!--    
+    ================================================================================================
+-->
 
 ## Repository Layout
 
@@ -45,6 +65,16 @@ fullstack-core/
 ├── redis/                  # Redis ACL initialization scripts generated from
 │                           # environment variables at bootstrap time.
 │
+│
+├── LICENSES/               # Full texts of all licenses used in the project.
+│   │
+│   ├── Apache-2.0.txt      # Apache License, Version 2.0.
+│   └── CC0-1.0.txt         # Creative Commons CC0 1.0 Universal Public Domain
+│                           # Dedication.
+│
+├── LICENSE.txt             # Licensing overview: states which license applies
+│                           # to which files; refers to `LICENSES/`.
+│
 ├── docker-compose.yml      # Docker Compose stack for running infrastructure
 │                           # services (PostgreSQL, Redis) locally.
 │
@@ -71,7 +101,11 @@ fullstack-core/
 Every file contains comprehensive inline comments to explain the code. 
 
 > **Note:**  
-Since the primary focus here is on demonstrating backend server patterns rather than database configuration, `docker-compose.yml` uses a minimal setup for both databases — for more detailed PostgreSQL and Redis configurations, see [postgresql-core](https://github.com/Sierra-Arn/postgresql-core) and [redis-core](https://github.com/Sierra-Arn/redis-core).
+Since the primary focus here is on demonstrating backend server patterns rather than database configuration, `docker-compose.yml` uses a minimal setup for both databases — for more detailed PostgreSQL and Redis configurations, see [postgresql-core](https://github.com/snegoviol/postgresql-core) and [redis-core](https://github.com/snegoviol/redis-core).
+
+<!--    
+    ================================================================================================
+-->
 
 ## Package Overview
 
@@ -167,6 +201,10 @@ Route handlers are organized by domain resource under `modules/`, with each modu
 
 The `exception_handlers/` directory translates internal exceptions into uniform HTML error responses suitable for both full-page renders and HTMX swaps. The `middleware/` directory implements cross-cutting concerns applied to every request before it reaches a route handler. The `shared/` directory contains server-specific utilities reused across multiple modules, including form and query parsing, dataclass request shapes, authentication helpers, and shared UI components under `shared/ui/`.
 
+<!--    
+    ================================================================================================
+-->
+
 ### 2. `packages/shared/`
 
 Centralizes all infrastructure client code and shared utilities consumed across the system. Implements the concrete clients for PostgreSQL and Redis, the shared Celery application, and base configuration primitives.
@@ -208,6 +246,10 @@ shared/
         └── client.py               # Async Redis client instances keyed by logical database.
 ```
 
+<!--    
+    ================================================================================================
+-->
+
 ### 3. `packages/services/`
 
 Centralizes cross-process business logic built on top of shared infrastructure. Each library implements a self-contained domain concern and is consumed by the server.
@@ -229,6 +271,10 @@ services/
         ├── types.py                # SessionPayload schema for serialized session data.
         └── service.py              # Session creation, lookup, and revocation in Redis.
 ```
+
+<!--    
+    ================================================================================================
+-->
 
 ### 4. `packages/worker-inference/`
 
@@ -252,6 +298,10 @@ worker-inference/
 
 This worker is isolated from maintenance tasks to prevent VRAM from being occupied by non-ML operations. The `_state.py` module ensures that the heavy model weights are loaded exactly once when the worker process starts, not on every task invocation.
 
+<!--    
+    ================================================================================================
+-->
+
 ### 5. `packages/worker-maintenance/`
 
 The CPU-bound process package that executes **scheduled maintenance** tasks — the system's isolated maintenance context, free of any ML or GPU dependencies. It can run either as a Celery worker consuming from the maintenance queue or as a beat scheduler dispatching periodic tasks into that queue.
@@ -269,6 +319,10 @@ worker-maintenance/
 ```
 
 The maintenance worker uses a `solo` pool, which is appropriate for lightweight database operations that require no parallelism within a single process. Its complete isolation from the inference worker keeps GPU memory dedicated to model execution, never pinned by a process that performs no ML work. The beat scheduler runs as a separate process and dispatches the daily quota reset into the maintenance queue according to the schedule configured in `celery_lib`.
+
+<!--    
+    ================================================================================================
+-->
 
 ### 6. `packages/scripts/`
 
@@ -290,6 +344,10 @@ scripts/
 
 The `quick_start.py` script orchestrates infrastructure provisioning, frontend asset builds, database migration, and process launch in the correct dependency order, eliminating manual setup steps. The `utils/` scripts generate environment and infrastructure initialization artifacts from environment variables, enforcing the principle of least privilege for database users and Redis ACLs.
 
+<!--    
+    ================================================================================================
+-->
+
 ## Infrastructure Directories
 
 ### 7. `migrations/`
@@ -310,6 +368,10 @@ migrations/
 └── script.py.mako                              # Migration script template.
 ```
 
+<!--    
+    ================================================================================================
+-->
+
 ### 8. `postgres/` and `redis/`
 
 Infrastructure initialization artifacts generated by the scripts in `packages/scripts/utils/` from environment variables at bootstrap time.
@@ -317,3 +379,7 @@ Infrastructure initialization artifacts generated by the scripts in `packages/sc
 `postgres/` contains the SQL script that creates the application database user with restricted privileges — SELECT, INSERT, UPDATE, and DELETE on tables only, preventing the application user from dropping tables, schemas, or the database itself.
 
 `redis/` contains the ACL configuration that defines two Redis users: an admin user with unrestricted access for operational tasks, and an application user restricted to only the commands the service actually issues, with the default user disabled entirely.
+
+<!--    
+    ================================================================================================
+-->

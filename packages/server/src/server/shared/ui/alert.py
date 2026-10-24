@@ -1,22 +1,22 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/ui/alert.py
+# ==================================================================================================
+
 from enum import StrEnum
 from fasthtml.common import Div, Span, FT
 from ..utils import create_icon
 
+# ==================================================================================================
 
 class Alert(StrEnum):
     """
@@ -39,6 +39,7 @@ class Alert(StrEnum):
     WARNING = "warning"
     ERROR = "error"
 
+# ==================================================================================================
 
 _ALERT_CLASSES: dict[Alert, str] = {
     Alert.INFO: "alert alert-info",
@@ -47,6 +48,7 @@ _ALERT_CLASSES: dict[Alert, str] = {
     Alert.ERROR: "alert alert-error",
 }
 
+# ==================================================================================================
 
 _ALERT_ICONS: dict[Alert, str] = {
     Alert.INFO: "information-circle",
@@ -55,6 +57,7 @@ _ALERT_ICONS: dict[Alert, str] = {
     Alert.ERROR: "x-circle",
 }
 
+# ==================================================================================================
 
 def _create_alert_icon(alert_type: Alert) -> FT:
     """
@@ -79,11 +82,11 @@ def _create_alert_icon(alert_type: Alert) -> FT:
         cls="shrink-0",
     )
 
+# ==================================================================================================
 
 def create_alert(
     message: str,
     alert_type: Alert = Alert.INFO,
-    *,
     show_icon: bool = True,
 ) -> FT:
     """
@@ -122,9 +125,9 @@ def create_alert(
         role="alert",
     )
 
+# ==================================================================================================
 
 def create_form_alert_slot(
-    *,
     error: str | None = None,
     success: str | None = None,
 ) -> FT:
@@ -167,3 +170,5 @@ def create_form_alert_slot(
         *children,
         id="form-alert",
     )
+
+# ==================================================================================================

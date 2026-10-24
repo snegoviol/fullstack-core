@@ -1,22 +1,19 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Backend Core
-# https://github.com/Sierra-Arn/backend-core
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Backend Core (https://github.com/snegoviol/backend-core).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/scripts/src/scripts/quick_start.py
+# ==================================================================================================
 """
 Local development environment quick-start script.
 
@@ -105,6 +102,7 @@ from urllib.request import urlopen
 from urllib.error import URLError
 from dotenv import load_dotenv
 
+# ==================================================================================================
 
 def _run(cmd: list[str]) -> None:
     """
@@ -120,6 +118,7 @@ def _run(cmd: list[str]) -> None:
     if result.returncode != 0:
         sys.exit(result.returncode)
 
+# ==================================================================================================
 
 def _terminal(cmd: list[str]) -> None:
     """
@@ -133,6 +132,7 @@ def _terminal(cmd: list[str]) -> None:
     print(f"\n>>> gnome-terminal: {' '.join(cmd)}")
     subprocess.Popen(["gnome-terminal", "--", "bash", "-c", " ".join(cmd)])
 
+# ==================================================================================================
 
 def _get_server_url() -> tuple[str, str]:
     """
@@ -152,6 +152,7 @@ def _get_server_url() -> tuple[str, str]:
     base_url = f"http://{host}:{port}"
     return f"{base_url}/health/shallow/", base_url
 
+# ==================================================================================================
 
 def _start_infrastructure() -> None:
     """
@@ -173,6 +174,7 @@ def _start_infrastructure() -> None:
 
     _run(["just", "db-migrate"])
 
+# ==================================================================================================
 
 def _wait_for_server(
     health_url: str,
@@ -208,6 +210,7 @@ def _wait_for_server(
         time.sleep(interval)
     return False
 
+# ==================================================================================================
 
 if __name__ == "__main__":
     _start_infrastructure()
@@ -224,3 +227,5 @@ if __name__ == "__main__":
         webbrowser.open(base_url)
     else:
         print(f"[warn] server did not respond in time, open manually: {base_url}")
+
+# ==================================================================================================

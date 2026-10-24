@@ -1,18 +1,17 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/auth.py
+# ==================================================================================================
+
 from functools import wraps
 from starlette import status
 from starlette.requests import Request
@@ -22,6 +21,7 @@ from postgres_lib import Role
 from session_lib import SessionService, SessionPayload, session_config
 from .utils import html_response
 
+# ==================================================================================================
 
 async def get_session_user(request: Request) -> SessionPayload:
     """
@@ -76,6 +76,7 @@ async def get_session_user(request: Request) -> SessionPayload:
 
     return payload
 
+# ==================================================================================================
 
 async def require_role(request: Request, role: Role) -> SessionPayload:
     """
@@ -133,6 +134,7 @@ async def require_role(request: Request, role: Role) -> SessionPayload:
 
     return user
 
+# ==================================================================================================
 
 def role_for_display(handler):
     """
@@ -177,6 +179,7 @@ def role_for_display(handler):
         return html_response(result)
     return wrapper
 
+# ==================================================================================================
 
 def role_for_authorization(required_role: Role):
     """
@@ -221,3 +224,5 @@ def role_for_authorization(required_role: Role):
             return html_response(result)
         return wrapper
     return decorator
+
+# ==================================================================================================

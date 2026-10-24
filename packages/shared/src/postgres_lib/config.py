@@ -1,27 +1,27 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Human Pose Estimation Service
-# https://github.com/Sierra-Arn/pose-estimation-service
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Human Pose Estimation Service 
+# (https://github.com/snegoviol/pose-estimation-service).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/postgres_lib/config.py
+# ==================================================================================================
+
 from typing import ClassVar, Final
 from urllib.parse import quote_plus
 from pydantic import Field
 from base_lib import BaseConfig
 
+# ==================================================================================================
 
 class PostgresConfig(BaseConfig):
     """
@@ -72,18 +72,24 @@ class PostgresConfig(BaseConfig):
 
     env_prefix: ClassVar[str] = "POSTGRES_"
 
-    # ========== ENV-DEPENDENT (configurable via POSTGRES_ prefixed env vars) ==========
+    # ---------------------------------------------------------------------------------------------- 
+    # ENV-DEPENDENT (configurable via POSTGRES_ prefixed env vars)
+    # ---------------------------------------------------------------------------------------------- 
     host: str = "127.0.0.1"
     port: int = Field(default=5432, ge=1, le=65535)
     user_name: str
     user_password: str
     user_db_name: str
 
-    # ========== ARCHITECTURAL CONSTANTS (private, not configurable via env) ==========
+    # ---------------------------------------------------------------------------------------------- 
+    # ARCHITECTURAL CONSTANTS (private, not configurable via env)
+    # ---------------------------------------------------------------------------------------------- 
     _echo: Final[bool] = False
     _autocommit: Final[bool] = False
     _autoflush: Final[bool] = False
     _expire_on_commit: Final[bool] = False
+
+    # ---------------------------------------------------------------------------------------------- 
 
     @property
     def database_url(self) -> str:
@@ -106,5 +112,8 @@ class PostgresConfig(BaseConfig):
             f"@{self.host}:{self.port}/{self.user_db_name}"
         )
 
+# ==================================================================================================
 
 postgres_config = PostgresConfig()
+
+# ==================================================================================================

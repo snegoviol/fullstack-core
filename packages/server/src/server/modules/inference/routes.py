@@ -1,18 +1,17 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/inference/routes.py
+# ==================================================================================================
+
 from datetime import datetime, timezone
 from starlette import status
 from starlette.exceptions import HTTPException
@@ -32,6 +31,7 @@ from .schemas import InferenceForm
 from ...shared import role_for_authorization, parse_form
 from ...config import server_config
 
+# ==================================================================================================
 
 @role_for_authorization(Role.USER)
 async def inference_get(request: Request, user: SessionPayload) -> Response:
@@ -53,6 +53,7 @@ async def inference_get(request: Request, user: SessionPayload) -> Response:
     """
     return create_inference_page(role=user.role)
 
+# ==================================================================================================
 
 @role_for_authorization(Role.USER)
 @parse_form(InferenceForm)
@@ -97,6 +98,8 @@ async def inference_post(request: Request, user: SessionPayload, form: Inference
             error="Prompt is required.",
         )
 
+    # ----------------------------------------------------------------------------------------------
+
     async with get_async_db_session() as session:
         db_user = await UserRepository.get_by_id(session, user.user_id)
 
@@ -111,6 +114,8 @@ async def inference_post(request: Request, user: SessionPayload, form: Inference
                 error="You have exceeded your inference quota.",
             )
 
+    # ----------------------------------------------------------------------------------------------
+
     task = celery_app.send_task(
         celery_config.task_name_inference,
         args=[form.input_text, user.user_id],
@@ -119,6 +124,7 @@ async def inference_post(request: Request, user: SessionPayload, form: Inference
 
     return create_inference_pending_partial(task_id=task.id)
 
+# ==================================================================================================
 
 @role_for_authorization(Role.USER)
 async def inference_status_get(request: Request, user: SessionPayload) -> Response:
@@ -158,3 +164,5 @@ async def inference_status_get(request: Request, user: SessionPayload) -> Respon
         output_text=payload["output_text"],
         created_at=datetime.now(timezone.utc),
     )
+
+# ==================================================================================================

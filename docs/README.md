@@ -1,6 +1,26 @@
+<!--    
+    ================================================================================================
+    
+    Copyright (c) 2026 Ilya Snegov
+    
+    Dedicated to the public domain under the Creative Commons
+    CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+    You may obtain a copy of the Dedication at
+    
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+    ================================================================================================
+    docs/README.md
+    ================================================================================================
+-->
+
 # Full-Stack Core
 
 > *This directory holds the full technical documentation for Full-Stack Core. This file serves as its entry point: it gives a high-level overview of the application, then points to the file covering each layer of the system, from the technology stack to the runtime behavior of key user-facing flows.*
+
+<!--    
+    ================================================================================================
+-->
 
 ## I. Project Overview
 
@@ -17,6 +37,10 @@ Full-Stack Core is a monolithic server-side rendered web application that presen
 | Access logging | Every request/response pair is logged with method, path, status code, and latency. |
 | Uniform error handling | Expected HTTP exceptions and unhandled failures are mapped to consistent HTML error responses suitable for both full-page renders and HTMX swaps. |
 
+<!--    
+    ================================================================================================
+-->
+
 ## II. Documentation Overview
 
 Each file focuses on a specific layer of abstraction, ranging from the technology stack to the runtime behavior of individual user flows.
@@ -29,3 +53,7 @@ Each file focuses on a specific layer of abstraction, ranging from the technolog
 
 - To review runtime interaction patterns and sequence diagrams for key user flows, see  
     [03-user-flows.md](03-user-flows.md).
+
+<!--    
+    ================================================================================================
+-->

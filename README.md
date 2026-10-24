@@ -1,6 +1,29 @@
+<!--    
+    ================================================================================================
+    
+    Copyright (c) 2026 Ilya Snegov
+    
+    Dedicated to the public domain under the Creative Commons
+    CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+    You may obtain a copy of the Dedication at
+    
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+    ================================================================================================
+    README.md
+    ================================================================================================
+-->
+
 # Full-Stack Core
 
-*An educational project demonstrating how to build a server-side rendered web application with Python, covering authentication, authorization, rate limiting, access logging, global error handling, partial page updates, and client-side interactivity.*
+> *An educational project demonstrating how to build a production-grade server-side rendered web application with Python. While designed for learning, its comprehensive architecture — covering SSR, HTMX partial updates, background tasks, and uniform error handling — makes it a solid foundation for real-world full-stack applications.*
+
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](#license)
+[![License: CC0 1.0](https://img.shields.io/badge/License-CC0%201.0-blue.svg)](#license)
+
+<!--    
+    ================================================================================================
+-->
 
 ## Project Structure
 
@@ -38,12 +61,16 @@ fullstack-core/
 │                           # bootstrapping, infrastructure initialization, and
 │                           # auxiliary utility tasks.
 │
+├── migrations/             # Alembic migration environment and database schema
+│                           # change scripts.
+│
 ├── docs/                   # Technical documentation covering project dependencies,
 │                           # codebase layout, and sequence diagrams for key user
 │                           # flows.
 │
-├── migrations/             # Alembic migration environment and database schema
-│                           # change scripts.
+├── LICENSES/               # Full texts of all licenses used in the project.
+│
+├── LICENSE.txt             # Licensing overview: which license applies to which files.
 │
 ├── docker-compose.yml      # Docker Compose stack for running infrastructure
 │                           # services (PostgreSQL, Redis) locally.
@@ -70,27 +97,41 @@ fullstack-core/
                             # manages the pixi environment per recipe.
 ```
 
+<!--    
+    ================================================================================================
+-->
+
 ## Quick Start
 
 ### I. Prerequisites
 
-- [Pixi](https://pixi.sh/latest/) package manager.
-- [Docker and Docker Compose](https://docs.docker.com/engine/install/).
-- GNU/Linux-based system on `x86_64` architecture.
-- NVIDIA GPU with a driver that supports CUDA `>= 12.8`.
+| Component            | Requirement                               |
+| :------------------- | :---------------------------------------- |
+| **Operating System** | GNU/Linux-based system                    |
+| **Architecture**     | `x86_64`                                  |
+| **Package Manager**  | [`Pixi`](https://pixi.prefix.dev/latest/) |
+| **Container Tools**  | [Docker and Docker Compose](https://docs.docker.com/engine/install/) |
+| **GPU**              | NVIDIA GPU with a driver supporting CUDA `>= 12.8` |
 
 > **Note: on these prerequisites**  
-> These are not strict requirements but describe the environment used for development. The package can be set up in alternative environments with different package managers, operating systems, or GPU configurations if needed.
+> These are not strict requirements, but rather the baseline environment where the code is 
+guaranteed to run out of the box. Alternative setups are possible but may require manual 
+configuration.
 
 > **Note: on CUDA versions**  
-> The `>= 12.8` figure is a *driver* requirement, enforced through pixi's `system-requirements`. It was chosen because 12.8 was the default CUDA build shipped by PyTorch at the time development started (a plain `pip install torch` pulled the 12.8 build back then).
+> The `>= 12.8` constraint is enforced via Pixi's `system-requirements`, reflecting the default 
+PyTorch CUDA build at the time of development. Newer driver versions are fully supported.
+
+<!--    
+    ================================================================================================
+-->
 
 ### II. Setup
 
 1. **Clone the repository**
 
     ```bash
-    git clone git@github.com:Sierra-Arn/fullstack-core.git
+    git clone https://github.com/snegoviol/fullstack-core.git
     cd fullstack-core
     ```
 
@@ -106,6 +147,10 @@ fullstack-core/
     pixi shell
     ```
 
+<!--    
+    ================================================================================================
+-->
+
 ### III. Launch
 
 Once the environment is activated, the service can be launched with a single command:
@@ -120,6 +165,10 @@ The launch script will automatically execute all necessary setup steps, start th
 > The launch script is fully documented with step-by-step comments explaining each action. You can find it here:
 > - [Quick start script](./packages/scripts/src/scripts/quick_start.py)
 
+<!--    
+    ================================================================================================
+-->
+
 ### IV. Cleanup
 
 When you are done, stop the server, workers, and scheduler by terminating their terminal processes, then bring down the infrastructure containers:
@@ -128,6 +177,20 @@ When you are done, stop the server, workers, and scheduler by terminating their 
 just docker-down
 ```
 
+<!--    
+    ================================================================================================
+-->
+
 ## License
 
-This project is licensed under the [Apache License, Version 2.0](LICENSE).
+Each file in this repository is licensed under one of the following licenses:
+
+- [Apache License, Version 2.0](LICENSES/Apache-2.0.txt),
+- [Creative Commons CC0 1.0 Universal Public Domain Dedication](LICENSES/CC0-1.0.txt).
+
+The applicable license is stated in the header comment of each file. 
+See [LICENSE.txt](LICENSE.txt) for details.ыы
+
+<!--    
+    ================================================================================================
+-->

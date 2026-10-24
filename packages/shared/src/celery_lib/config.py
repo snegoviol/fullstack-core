@@ -1,25 +1,25 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Human Pose Estimation Service
-# https://github.com/Sierra-Arn/pose-estimation-service
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Human Pose Estimation Service 
+# (https://github.com/snegoviol/pose-estimation-service).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/celery_lib/config.py
+# ==================================================================================================
+
 from typing import ClassVar, Final
 from base_lib import BaseConfig
 
+# ==================================================================================================
 
 class CeleryConfig(BaseConfig):
     """
@@ -92,8 +92,9 @@ class CeleryConfig(BaseConfig):
 
     env_prefix: ClassVar[str] = "CELERY_"
 
-    # ======= ENV-DEPENDENT (configurable via CELERY_ prefixed env vars) =======
-
+    # ---------------------------------------------------------------------------------------------- 
+    # ENV-DEPENDENT (configurable via CELERY_ prefixed env vars)
+    # ---------------------------------------------------------------------------------------------- 
     app_name: str = "fullstack-backend"
     result_expires: int = 3600
     queue_name_inference: str = "inference-queue"
@@ -105,8 +106,9 @@ class CeleryConfig(BaseConfig):
     hour_reset_inference_counts: int = 0
     minute_reset_inference_counts: int = 0
 
-    # ======= ARCHITECTURAL CONSTANTS (private, not configurable via env) =======
-
+    # ---------------------------------------------------------------------------------------------- 
+    # ARCHITECTURAL CONSTANTS (private, not configurable via env)
+    # ---------------------------------------------------------------------------------------------- 
     _task_serializer: Final[str] = "json"
     _result_serializer: Final[str] = "json"
     _accept_content: Final[list[str]] = ["json"]
@@ -114,5 +116,8 @@ class CeleryConfig(BaseConfig):
     _enable_utc: Final[bool] = True
     _exchange_type: Final[str] = "direct"
 
+# ==================================================================================================
 
 celery_config = CeleryConfig()
+
+# ==================================================================================================
