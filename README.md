@@ -21,6 +21,20 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](#license)
 [![License: CC0 1.0](https://img.shields.io/badge/License-CC0%201.0-blue.svg)](#license)
 
+> [!WARNING]  
+> **Project Archived**
+>
+> This project is no longer maintained. Issues and pull requests are not accepted, so please fork the repository if you want to build on it. See the sections below for details.
+> 
+> **Context:**  
+> Originally, this repository was conceived as a personal initiative to go beyond building headless JSON REST APIs and create a complete, user-facing web application. I wanted to deeply explore full-stack development patterns, from server-side rendering and client-side interactivity to background task processing, and deliver something that could serve real end users with a polished interface. This endeavor served as a practical deep-dive into how a full-stack Python web application is structured end to end.
+> 
+> **Reason for Archiving:**  
+> With the full-stack patterns explored and the application built out, the primary objective of this repository has been successfully achieved, and active development is no longer required. However, this repository remains publicly available as a valuable resource for:
+> - Students and learners studying how a full-stack web application is structured, from server-side rendering to background processing.
+> - Developers looking for a foundation for a real-world, server-side rendered web application in Python.
+> - Engineers exploring full-stack architecture with a complex, real-world example.
+
 <!--    
     ================================================================================================
 -->
