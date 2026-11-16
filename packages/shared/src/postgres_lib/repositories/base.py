@@ -1,28 +1,27 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Backend Core
-# https://github.com/Sierra-Arn/backend-core
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Backend Core (https://github.com/snegoviol/backend-core).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/postgres_lib/repositories/base.py
+# ==================================================================================================
+
 from typing import TypeVar, Any, ClassVar
 from abc import ABC
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..models import Base
 
+# ==================================================================================================
 
 ModelType = TypeVar("ModelType", bound=Base)
 """
@@ -34,6 +33,7 @@ substitutions to subclasses of the declarative base, which every model inherits
 from.
 """
 
+# ==================================================================================================
 
 class BaseRepository(ABC):
     """
@@ -66,6 +66,8 @@ class BaseRepository(ABC):
 
     model_class: ClassVar[type[ModelType]]
 
+    # ----------------------------------------------------------------------------------------------
+
     def __new__(cls, *args, **kwargs) -> None:
         """
         Prevent direct instantiation of BaseRepository.
@@ -81,6 +83,8 @@ class BaseRepository(ABC):
             f"{cls.__name__} cannot be instantiated. "
             "Use classmethods directly on the subclass."
         )
+
+    # ----------------------------------------------------------------------------------------------
 
     def __init_subclass__(cls, **kwargs) -> None:
         """
@@ -99,6 +103,8 @@ class BaseRepository(ABC):
             raise TypeError(
                 f"{cls.__name__} must define 'model_class' as a class variable"
             )
+
+    # ----------------------------------------------------------------------------------------------
 
     @classmethod
     async def create(
@@ -128,6 +134,8 @@ class BaseRepository(ABC):
         await session.refresh(db_obj)
         return db_obj
 
+    # ----------------------------------------------------------------------------------------------
+
     @classmethod
     async def get_by_id(
         cls,
@@ -152,6 +160,8 @@ class BaseRepository(ABC):
         stmt = select(cls.model_class).where(cls.model_class.id == obj_id)
         result = await session.execute(stmt)
         return result.scalar_one_or_none()
+
+    # ----------------------------------------------------------------------------------------------
 
     @classmethod
     async def get_all(
@@ -188,6 +198,8 @@ class BaseRepository(ABC):
         )
         result = await session.execute(stmt)
         return list(result.scalars().all())
+
+    # ----------------------------------------------------------------------------------------------
 
     @classmethod
     async def update_by_id(
@@ -228,6 +240,8 @@ class BaseRepository(ABC):
         await session.flush()
         await session.refresh(db_obj)
         return db_obj
+
+    # ----------------------------------------------------------------------------------------------
     
     @classmethod
     async def delete_by_id(
@@ -255,6 +269,8 @@ class BaseRepository(ABC):
             return False
         await session.delete(db_obj)
         return True
+
+    # ----------------------------------------------------------------------------------------------
     
     @classmethod
     async def count(
@@ -281,3 +297,5 @@ class BaseRepository(ABC):
         stmt = select(func.count()).select_from(cls.model_class)
         result = await session.execute(stmt)
         return result.scalar_one()
+
+# ==================================================================================================

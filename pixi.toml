@@ -1,11 +1,23 @@
 # ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
+# Dedicated to the public domain under the Creative Commons
+# CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+# You may obtain a copy of the Dedication at
+# 
+# https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+# 
+# ==================================================================================================
+# pixi.toml
+# ==================================================================================================
 
 [workspace]
-authors = ["Sierra-Arn <unweariedheart@gmail.com>"]
+authors = ["Ilya Snegov <unweariedheart@gmail.com>"]
 name = "fullstack-core"
 version = "1.0.0"
-license = "Apache-2.0"
-repository = "https://github.com/Sierra-Arn/fullstack-core"
+license = "Apache-2.0 AND CC0-1.0"
+repository = "https://github.com/snegoviol/fullstack-core"
 
 channels = ["nvidia", "conda-forge"]
 platforms = [

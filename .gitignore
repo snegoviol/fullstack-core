@@ -1,3 +1,17 @@
+# ==================================================================================================
+#
+# Copyright (c) 2026 Ilya Snegov
+#
+# Dedicated to the public domain under the Creative Commons
+# CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+# You may obtain a copy of the Dedication at
+#
+# https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+#
+# ==================================================================================================
+# .gitignore
+# ==================================================================================================
+
 # VS Code
 .vscode/
 
@@ -21,3 +35,5 @@ celery-beat/
 # not used by the application since sessions are managed via Redis,
 # but created automatically by FastHTML on every startup
 .sesskey
+
+# ==================================================================================================

@@ -1,22 +1,22 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/inference/components.py
+# ==================================================================================================
+
 from datetime import datetime
 from fasthtml.common import Div, P, Span, FT
 from ...shared import create_icon
 
+# ==================================================================================================
 
 def _create_section_label(text: str, icon_name: str | None = None) -> Span:
     """
@@ -54,6 +54,7 @@ def _create_section_label(text: str, icon_name: str | None = None) -> Span:
         cls="text-xs font-semibold text-base-content/50 uppercase tracking-wide",
     )
 
+# ==================================================================================================
 
 def _create_content_block(
     label: str,
@@ -92,6 +93,7 @@ def _create_content_block(
         cls="mb-4",
     )
 
+# ==================================================================================================
 
 def _create_user_header(user_id: int) -> Div:
     """
@@ -117,6 +119,7 @@ def _create_user_header(user_id: int) -> Div:
         cls="flex justify-between items-center mb-4",
     )
 
+# ==================================================================================================
 
 def _create_timestamp_footer(created_at: datetime) -> Div:
     """
@@ -145,6 +148,7 @@ def _create_timestamp_footer(created_at: datetime) -> Div:
         cls="flex justify-end",
     )
 
+# ==================================================================================================
 
 def create_inference_card(
     input_text: str,
@@ -200,3 +204,5 @@ def create_inference_card(
         *children,
         cls="card bg-base-100 shadow-sm p-6 mb-4",
     )
+
+# ==================================================================================================

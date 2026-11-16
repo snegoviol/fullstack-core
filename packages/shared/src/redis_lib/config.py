@@ -1,26 +1,25 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Backend Core
-# https://github.com/Sierra-Arn/backend-core
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Backend Core (https://github.com/snegoviol/backend-core).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/redis_lib/config.py
+# ==================================================================================================
+
 from typing import ClassVar
 from pydantic import Field
 from base_lib import BaseConfig
 
+# ==================================================================================================
 
 class RedisConfig(BaseConfig):
     """
@@ -81,6 +80,8 @@ class RedisConfig(BaseConfig):
     broker_db_index: int = Field(default=2, ge=0)
     result_backend_db_index: int = Field(default=3, ge=0)
 
+    # ----------------------------------------------------------------------------------------------
+
     def _build_url(self, db: int) -> str:
         """
         Assemble a Redis connection URI for the given database index.
@@ -103,6 +104,8 @@ class RedisConfig(BaseConfig):
             f"{db}"
         )
 
+    # ----------------------------------------------------------------------------------------------
+
     @property
     def session_url(self) -> str:
         """
@@ -114,6 +117,8 @@ class RedisConfig(BaseConfig):
             Redis URI pointing to session_db_index.
         """
         return self._build_url(self.session_db_index)
+
+    # ----------------------------------------------------------------------------------------------
 
     @property
     def rate_limit_url(self) -> str:
@@ -127,6 +132,8 @@ class RedisConfig(BaseConfig):
         """
         return self._build_url(self.rate_limit_db_index)
 
+    # ----------------------------------------------------------------------------------------------
+
     @property
     def broker_url(self) -> str:
         """
@@ -138,6 +145,8 @@ class RedisConfig(BaseConfig):
             Redis URI pointing to broker_db_index.
         """
         return self._build_url(self.broker_db_index)
+
+    # ----------------------------------------------------------------------------------------------
 
     @property
     def result_backend_url(self) -> str:
@@ -151,5 +160,8 @@ class RedisConfig(BaseConfig):
         """
         return self._build_url(self.result_backend_db_index)
 
+# ==================================================================================================
 
 redis_config = RedisConfig()
+
+# ==================================================================================================

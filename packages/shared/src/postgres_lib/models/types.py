@@ -1,25 +1,24 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Backend Core
-# https://github.com/Sierra-Arn/backend-core
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Backend Core (https://github.com/snegoviol/backend-core).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/postgres_lib/models/types.py
+# ==================================================================================================
+
 from enum import StrEnum
 from sqlalchemy import Enum as SQLEnum
 
+# ==================================================================================================
 
 class LeadStatus(StrEnum):
     """
@@ -44,6 +43,7 @@ class LeadStatus(StrEnum):
     ANSWERED = "answered"
     REJECTED = "rejected"
 
+# ==================================================================================================
 
 LeadStatusSQL = SQLEnum(
     *[e.value for e in LeadStatus],
@@ -57,6 +57,7 @@ keeping data integrity independent of application-layer validation. The named
 type appears explicitly in migrations, which improves their readability.
 """
 
+# ==================================================================================================
 
 class Role(StrEnum):
     """
@@ -106,6 +107,7 @@ class Role(StrEnum):
             "admin": 3,
         }[self.value]
 
+# ==================================================================================================
 
 RoleSQL = SQLEnum(
     *[e.value for e in Role],
@@ -118,3 +120,5 @@ Restricts the column at the database level to the predefined set of roles,
 keeping data integrity independent of application-layer validation. The named
 type appears explicitly in migrations, which improves their readability.
 """
+
+# ==================================================================================================

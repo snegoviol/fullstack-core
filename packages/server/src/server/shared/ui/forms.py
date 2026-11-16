@@ -1,26 +1,25 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/ui/forms.py
+# ==================================================================================================
+
 from fasthtml.common import Div, Label, P, FT
 
+# ==================================================================================================
 
 def create_form_control(
     label_text: str,
     field_id: str,
     field_element: FT,
-    *,
     label_hint: str | None = None,
     margin_bottom: str = "mb-4",
 ) -> Div:
@@ -78,6 +77,7 @@ def create_form_control(
         cls=f"form-control {margin_bottom}",
     )
 
+# ==================================================================================================
 
 def create_form_card(*content: FT) -> Div:
     """
@@ -101,3 +101,5 @@ def create_form_card(*content: FT) -> Div:
         *content,
         cls="card bg-base-100 shadow-sm p-8 w-full max-w-md",
     )
+
+# ==================================================================================================

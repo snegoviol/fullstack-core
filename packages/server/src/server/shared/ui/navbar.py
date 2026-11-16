@@ -1,23 +1,23 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/ui/navbar.py
+# ==================================================================================================
+
 from fasthtml.common import Nav, Div, A, FT, Form, Button
 from postgres_lib import Role
 from ..utils import create_icon
 from ...config import server_config, RoutePath
 
+# ==================================================================================================
 
 def _create_brand_link() -> A:
     """
@@ -35,6 +35,7 @@ def _create_brand_link() -> A:
         cls="btn btn-ghost text-xl font-bold",
     )
 
+# ==================================================================================================
 
 def _create_nav_link(label: str, href: str, icon: str | None = None) -> A:
     """
@@ -66,6 +67,7 @@ def _create_nav_link(label: str, href: str, icon: str | None = None) -> A:
         cls="btn btn-ghost gap-2",
     )
 
+# ==================================================================================================
 
 def _create_logout_button() -> Form:
     """
@@ -88,6 +90,7 @@ def _create_logout_button() -> Form:
         action=RoutePath.LOGOUT,
     )
 
+# ==================================================================================================
 
 def create_navbar(role: Role = Role.UNAUTHENTICATED) -> FT:
     """
@@ -116,6 +119,8 @@ def create_navbar(role: Role = Role.UNAUTHENTICATED) -> FT:
     """
     links: list[FT] = []
 
+    # ----------------------------------------------------------------------------------------------
+
     if role.level < Role.USER.level:
         links.extend(
             [
@@ -124,6 +129,9 @@ def create_navbar(role: Role = Role.UNAUTHENTICATED) -> FT:
                 _create_nav_link("Collaborate", RoutePath.COLLABORATE, icon="briefcase"),
             ]
         )
+
+    # ----------------------------------------------------------------------------------------------
+    
     else:
         links.extend(
             [
@@ -145,6 +153,8 @@ def create_navbar(role: Role = Role.UNAUTHENTICATED) -> FT:
 
         links.append(_create_logout_button())
 
+    # ----------------------------------------------------------------------------------------------
+
     return Nav(
         Div(
             _create_brand_link(),
@@ -156,3 +166,5 @@ def create_navbar(role: Role = Role.UNAUTHENTICATED) -> FT:
         ),
         cls="navbar bg-base-100 shadow-sm",
     )
+
+# ==================================================================================================

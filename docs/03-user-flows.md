@@ -1,3 +1,19 @@
+<!--    
+    ================================================================================================
+    
+    Copyright (c) 2026 Ilya Snegov
+    
+    Dedicated to the public domain under the Creative Commons
+    CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+    You may obtain a copy of the Dedication at
+    
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+    ================================================================================================
+    docs/03-user-flows.md
+    ================================================================================================
+-->
+
 # III. User Flows
 
 > *This document defines runtime interaction patterns through sequence diagrams, making the execution flow and inter-component communication explicit for each user-facing operation.*
@@ -5,6 +21,10 @@
 The following diagrams detail how browser requests traverse the server, interact with PostgreSQL for persistent state, consult Redis for sessions and rate limiting, and offload inference work to Celery workers running concurrently with the web server. Each flow demonstrates the authentication and authorization boundary applied before a request reaches its handler, as well as the role checks enforced on administrative pages.
 
 Where a handler returns an HTML fragment rather than a full document, the diagram notes the HTMX swap target so the partial-update behaviour is explicit.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /health/shallow`
 
@@ -15,6 +35,10 @@ sequenceDiagram
     B->>S: GET /health/shallow
     S-->>B: 200 OK
 ```
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /health/deep`
 
@@ -33,6 +57,10 @@ sequenceDiagram
     end
     S-->>B: 200 OK
 ```
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /register`
 
@@ -55,6 +83,10 @@ sequenceDiagram
 ```
 
 This is a full-page navigation (navbar link or direct URL), not an HTMX request. The server returns the HX-Redirect header, but a standard browser does not follow it on GET; HTMX clients do. Authenticated users normally never see the Register link in the navbar.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `POST /register`
 
@@ -84,6 +116,10 @@ sequenceDiagram
 
 Field validation runs in the handler before any database access. The handler does not block already-authenticated users on POST (only GET redirects them).
 
+<!--    
+    ================================================================================================
+-->
+
 ## `GET /login`
 
 ```mermaid
@@ -105,6 +141,10 @@ sequenceDiagram
 ```
 
 Same as GET /register: full-page navigation; HX-Redirect is not followed by a standard browser on GET.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `POST /login`
 
@@ -130,6 +170,10 @@ sequenceDiagram
 
 Login does not expose field-level validation errors; any failed credential check returns the same generic message.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `POST /logout`
 
 ```mermaid
@@ -146,6 +190,10 @@ sequenceDiagram
 ```
 
 Standard HTML form POST from the navbar (not HTMX). Redis delete runs only when a cookie is present; the session cookie is always cleared on the response.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /collaborate`
 
@@ -169,6 +217,10 @@ sequenceDiagram
 
 Public page for all visitors; authenticated users are not redirected away (unlike register/login).
 
+<!--    
+    ================================================================================================
+-->
+
 ## `POST /collaborate`
 
 ```mermaid
@@ -191,6 +243,10 @@ sequenceDiagram
 
 No authentication required. Company is optional; all other fields are validated before the lead is persisted.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `GET /inference`
 
 ```mermaid
@@ -212,6 +268,10 @@ sequenceDiagram
         end
     end
 ```
+
+<!--    
+    ================================================================================================
+-->
 
 ## `POST /inference`
 
@@ -244,6 +304,10 @@ sequenceDiagram
 
 Empty prompt is rejected before any database access. Error alerts swap only the result container; the prompt form stays intact.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `GET /inference/status/{task_id}`
 
 ```mermaid
@@ -274,6 +338,10 @@ sequenceDiagram
 ```
 
 Polling reads the Celery result backend only; persistence happens in the worker before the result payload is stored.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /inference/history`
 
@@ -307,6 +375,10 @@ sequenceDiagram
 
 History is scoped to the authenticated user. HTMX pagination is detected via the HX-Request header. When there are no records, the response is an empty-state partial instead of the list container.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `GET /leads`
 
 ```mermaid
@@ -339,6 +411,10 @@ sequenceDiagram
 
 HTMX pagination is detected via the HX-Request header. When there are no leads, the partial is an empty-state message instead of the list container.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `POST /leads/{id}/status`
 
 ```mermaid
@@ -366,6 +442,10 @@ sequenceDiagram
 ```
 
 Status is submitted via hx-vals on the transition buttons. Invalid status and disallowed transitions both return 400; the lead lookup runs only after the status value parses successfully.
+
+<!--    
+    ================================================================================================
+-->
 
 ## `GET /users`
 
@@ -399,6 +479,10 @@ sequenceDiagram
 
 Requires ADMIN exactly (not MODERATOR). HTMX pagination is detected via the HX-Request header. When there are no users, the partial is an empty-state message instead of the list container.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `POST /users/{id}/role`
 
 ```mermaid
@@ -427,6 +511,10 @@ sequenceDiagram
 
 Role is submitted via hx-vals on the role buttons. Unchanged role is checked only after the user record is loaded.
 
+<!--    
+    ================================================================================================
+-->
+
 ## `POST /users/{id}/delete`
 
 ```mermaid
@@ -447,3 +535,7 @@ sequenceDiagram
 ```
 
 Associated inference history is removed by the database CASCADE constraint on the foreign key, not by an explicit delete in the handler.
+
+<!--    
+    ================================================================================================
+-->

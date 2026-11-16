@@ -1,24 +1,25 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # migrations/env.py
+# ==================================================================================================
+
 import os
 from logging.config import fileConfig
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 from alembic import context
+
+# ==================================================================================================
 
 load_dotenv()
 
@@ -34,6 +35,8 @@ config = context.config
 # This line sets up loggers as defined in alembic.ini
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+# --------------------------------------------------------------------------------------------------
 
 env_vars = {
     "SUPERUSER_NAME": os.environ["POSTGRES_SUPERUSER_NAME"],
@@ -55,6 +58,8 @@ config.set_main_option("sqlalchemy.url", db_url)
 # Add the model's MetaData object here for 'autogenerate' support
 # This is vital - it tells Alembic which tables to track for migrations
 target_metadata = Base.metadata
+
+# ==================================================================================================
 
 def run_migrations_offline() -> None:
     """
@@ -79,6 +84,8 @@ def run_migrations_offline() -> None:
     # Run the migrations within a transaction
     with context.begin_transaction():
         context.run_migrations()
+
+# ==================================================================================================
 
 def run_migrations_online() -> None:
     """
@@ -109,9 +116,13 @@ def run_migrations_online() -> None:
         with context.begin_transaction():
             context.run_migrations()
 
+# ==================================================================================================
+
 # Determine which mode to run in (offline or online)
 # This is Alembic's standard way of choosing the execution mode
 if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+# ==================================================================================================

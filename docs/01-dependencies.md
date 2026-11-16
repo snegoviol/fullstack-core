@@ -1,6 +1,26 @@
+<!--    
+    ================================================================================================
+    
+    Copyright (c) 2026 Ilya Snegov
+    
+    Dedicated to the public domain under the Creative Commons
+    CC0 1.0 Universal Public Domain Dedication (the "Dedication").
+    You may obtain a copy of the Dedication at
+    
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+    ================================================================================================
+    docs/01-dependencies.md
+    ================================================================================================
+-->
+
 # I. Dependencies Overview
 
 > *This document describes the dependencies required by Full-Stack Core: what each one is and the role it plays in the project.*
+
+<!--    
+    ================================================================================================
+-->
 
 ## System Dependencies
 
@@ -12,6 +32,10 @@
 | NVIDIA GPU | — | GPU hardware | Hardware accelerator used by the inference worker for model execution. |
 | CUDA driver | — | Host GPU driver | Low-level host driver (`libcuda`) required for GPU-accelerated computation. |
 
+<!--    
+    ================================================================================================
+-->
+
 ## Docker Images
 
 | Dependency | Repository | What it is | Role in the project |
@@ -19,16 +43,24 @@
 | PostgreSQL | [docker.io/library/postgres](https://hub.docker.com/_/postgres) | Official Docker image for PostgreSQL | Runs the relational database engine in a container, storing all persistent application data (users, leads, inference history). |
 | Redis | [docker.io/library/redis](https://hub.docker.com/_/redis) | Official Docker image for Redis | Runs the in-memory data store in a container, serving as the Celery broker and result backend, and storing sessions and sliding window rate limit counters. |
 
+<!--    
+    ================================================================================================
+-->
+
 ## Pixi Dependencies
 
 ### Default Dependencies
 
 | Dependency | Repository | What it is | Role in the project |
 |---|---|---|---|
-| CPython | [python/cpython](https://github.com/python/cpython) | Python virtual machine | Executes all Python source code across every package in the monorepo. |
+| CPython | [python/cpython](https://github.com/python/cpython) | The de facto standard implementation of the Python programming language | Executes all Python source code across every package. |
 | python-dotenv | [theskumar/python-dotenv](https://github.com/theskumar/python-dotenv) | Environment variable loader | Loads variables from `.env` files into `os.environ` for local execution and tooling. |
 | just | [casey/just](https://github.com/casey/just) | Command runner | Provides short, readable recipes for bootstrapping, migrations, asset builds, and process launchers. |
 | Bun | [oven-sh/bun](https://github.com/oven-sh/bun) | JavaScript runtime and package manager | 1. Resolves and installs JavaScript dependencies for the frontend asset toolchain.<br>2. Produces a deterministic lockfile (`bun.lock`) for reproducible JavaScript environments. |
+
+<!--    
+    ------------------------------------------------------------------------------------------------
+-->
 
 ### Shared Dependencies
 
@@ -41,11 +73,19 @@
 | redis-py | [redis/redis-py](https://github.com/redis/redis-py) | Official Redis client | Connects application code and Celery to Redis as a data store, broker, and result backend. |
 | Celery | [celery/celery](https://github.com/celery/celery) | Distributed task queue | Dispatches work to worker processes that run concurrently with the web server and schedules periodic maintenance jobs. |
 
+<!--    
+    ------------------------------------------------------------------------------------------------
+-->
+
 ### Services Dependencies
 
 | Dependency | Repository | What it is | Role in the project |
 |---|---|---|---|
 | bcrypt | [pyca/bcrypt](https://github.com/pyca/bcrypt) | Password hashing library | Hashes passwords at registration and verifies them at login using the bcrypt algorithm. |
+
+<!--    
+    ------------------------------------------------------------------------------------------------
+-->
 
 ### Server Dependencies
 
@@ -54,6 +94,10 @@
 | FastHTML | [AnswerDotAI/fasthtml](https://github.com/AnswerDotAI/fasthtml) | Server-side HTML framework | Defines typed HTML components, routing integration, and server-rendered pages with HTMX partial updates. |
 | Uvicorn | [encode/uvicorn](https://github.com/encode/uvicorn) | ASGI server | Serves the application over HTTP. |
 | python-json-logger | [nhairs/python-json-logger](https://github.com/nhairs/python-json-logger) | JSON log formatter | Formats log records as structured JSON for consistent machine-readable output across processes. |
+
+<!--    
+    ------------------------------------------------------------------------------------------------
+-->
 
 ### Worker-Inference Dependencies
 
@@ -64,11 +108,19 @@
 | Transformers | [huggingface/transformers](https://github.com/huggingface/transformers) | Model and inference library | Loads the Qwen model, tokenizer, and generation pipeline used by the inference worker. |
 | Accelerate | [huggingface/accelerate](https://github.com/huggingface/accelerate) | Model runtime helper | Provides runtime helpers for efficient inference configuration and device placement. |
 
+<!--    
+    ================================================================================================
+-->
+
 ## Model Weights
 
 | Model | Repository | Used by |
 |---|---|---|
 | Qwen3.5-2B | [Qwen/Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B) | The `generate` task in the inference worker for user prompt completion. |
+
+<!--    
+    ================================================================================================
+-->
 
 ## Bun Dependencies
 
@@ -80,3 +132,7 @@
 | Heroicons | [tailwindlabs/heroicons](https://github.com/tailwindlabs/heroicons) | SVG icon set | Provides the source icon set that is copied into the project and referenced by UI components. |
 | HTMX | [bigskysoftware/htmx](https://github.com/bigskysoftware/htmx) | HTML-over-the-wire library | Enables partial page updates and form submissions by swapping server-rendered HTML fragments into the existing DOM. |
 | Alpine.js | [alpinejs/alpine](https://github.com/alpinejs/alpine) | Lightweight client-side reactivity | Implements small interactive behaviors (e.g., confirmation modal state) without a full single-page application framework. |
+
+<!--    
+    ================================================================================================
+-->

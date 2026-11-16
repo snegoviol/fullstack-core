@@ -1,18 +1,17 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/inference/partials.py
+# ==================================================================================================
+
 from datetime import datetime
 from fasthtml.common import Div, Form, Textarea, Button, FT
 from .components import create_inference_card
@@ -26,6 +25,7 @@ from ...shared.ui import (
     create_form_control
 )
 
+# ==================================================================================================
 
 def _create_inference_form() -> Form:
     """
@@ -70,6 +70,7 @@ def _create_inference_form() -> Form:
         **{"@submit": "running = true"},
     )
 
+# ==================================================================================================
 
 def create_inference_form_partial(
     error: str | None = None,
@@ -121,6 +122,7 @@ def create_inference_form_partial(
         id="inference-form",
     )
 
+# ==================================================================================================
 
 def create_inference_error_partial(error: str) -> FT:
     """
@@ -148,6 +150,7 @@ def create_inference_error_partial(error: str) -> FT:
         )
     )
 
+# ==================================================================================================
 
 def create_inference_pending_partial(task_id: str) -> FT:
     """
@@ -181,6 +184,7 @@ def create_inference_pending_partial(task_id: str) -> FT:
         hx_swap="innerHTML",
     )
 
+# ==================================================================================================
 
 def create_inference_result_partial(
     input_text: str,
@@ -221,3 +225,5 @@ def create_inference_result_partial(
             created_at=created_at,
         )
     )
+
+# ==================================================================================================

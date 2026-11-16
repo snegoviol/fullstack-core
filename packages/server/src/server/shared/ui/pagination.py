@@ -1,25 +1,24 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/ui/pagination.py
+# ==================================================================================================
+
 from fasthtml.common import Div, Button, Span, FT
 from ..utils import create_icon
 
+# ==================================================================================================
 
 def _create_page_button(
     page: int,
-    *,
     current_page: int,
     endpoint: str,
     target: str,
@@ -70,6 +69,8 @@ def _create_page_button(
             }
         )
 
+    # ----------------------------------------------------------------------------------------------
+
     children = []
 
     if icon_name:
@@ -91,6 +92,7 @@ def _create_page_button(
         **attrs,
     )
 
+# ==================================================================================================
 
 def _create_ellipsis() -> Span:
     """
@@ -107,6 +109,7 @@ def _create_ellipsis() -> Span:
         cls="btn btn-sm btn-disabled px-2",
     )
 
+# ==================================================================================================
 
 def _visible_pages(
     current_page: int,
@@ -151,6 +154,8 @@ def _visible_pages(
 
     result: list[int | None] = []
 
+    # ----------------------------------------------------------------------------------------------
+
     previous = None
 
     for page in sorted(pages):
@@ -162,6 +167,7 @@ def _visible_pages(
 
     return result
 
+# ==================================================================================================
 
 def create_pagination(
     current_page: int,
@@ -202,6 +208,8 @@ def create_pagination(
 
     buttons: list[FT] = []
 
+    # ----------------------------------------------------------------------------------------------
+
     # Previous
     if current_page > 1:
         buttons.append(
@@ -214,6 +222,8 @@ def create_pagination(
             )
         )
 
+    # ----------------------------------------------------------------------------------------------
+
     else:
         buttons.append(
             Button(
@@ -222,6 +232,8 @@ def create_pagination(
                 cls="btn btn-sm btn-disabled",
             )
         )
+
+    # ----------------------------------------------------------------------------------------------
 
     # Pages
     for page in _visible_pages(
@@ -239,6 +251,8 @@ def create_pagination(
                     target=target,
                 )
             )
+
+    # ----------------------------------------------------------------------------------------------
 
     # Next
     if current_page < total_pages:
@@ -265,3 +279,5 @@ def create_pagination(
         *buttons,
         cls="join flex justify-center mt-4",
     )
+
+# ==================================================================================================

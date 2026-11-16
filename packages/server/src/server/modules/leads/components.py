@@ -1,22 +1,22 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/leads/components.py
+# ==================================================================================================
+
 from fasthtml.common import Div, P, Span, Button, H3, FT
 from postgres_lib import LeadStatus
 from ...shared import create_icon
 
+# ==================================================================================================
 
 def _create_status_badge(status: LeadStatus) -> Span:
     """
@@ -44,6 +44,7 @@ def _create_status_badge(status: LeadStatus) -> Span:
         cls=styles[status],
     )
 
+# ==================================================================================================
 
 def _create_lead_header(name: str, status: LeadStatus) -> Div:
     """
@@ -71,6 +72,7 @@ def _create_lead_header(name: str, status: LeadStatus) -> Div:
         cls="flex items-center justify-between",
     )
 
+# ==================================================================================================
 
 def _create_lead_contact(email: str, company: str | None) -> Div:
     """
@@ -116,6 +118,7 @@ def _create_lead_contact(email: str, company: str | None) -> Div:
         cls="flex flex-col gap-1 mt-2",
     )
 
+# ==================================================================================================
 
 def _create_lead_message(message: str) -> Div:
     """
@@ -147,6 +150,7 @@ def _create_lead_message(message: str) -> Div:
         cls="mb-4",
     )
 
+# ==================================================================================================
 
 def _create_action_buttons(
     lead_id: int,
@@ -213,6 +217,7 @@ def _create_action_buttons(
         for target in available
     ]
 
+# ==================================================================================================
 
 def _create_confirmation_modal(lead_id: int) -> Div:
     """
@@ -274,6 +279,7 @@ def _create_confirmation_modal(lead_id: int) -> Div:
         cls="modal",
     )
 
+# ==================================================================================================
 
 def create_lead_card(
     lead_id: int,
@@ -347,3 +353,5 @@ def create_lead_card(
             "x-data": "{ open: false, pending_status: '' }",
         },
     )
+
+# ==================================================================================================

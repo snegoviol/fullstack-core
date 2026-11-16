@@ -1,24 +1,24 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/landing/pages.py
+# ==================================================================================================
+
 from fasthtml.common import Div, H1, H2, P, A, Section, FT
 from postgres_lib import Role
 from .components import create_feature_card, create_step_card
 from ...config import RoutePath
 from ...shared.ui import create_layout
 
+# ==================================================================================================
 
 def _create_hero_cta(role: Role) -> FT:
     """
@@ -59,6 +59,7 @@ def _create_hero_cta(role: Role) -> FT:
         cls="btn btn-primary btn-lg",
     )
 
+# ==================================================================================================
 
 def _create_hero_section(role: Role) -> Section:
     """
@@ -98,6 +99,7 @@ def _create_hero_section(role: Role) -> Section:
         ),
     )
 
+# ==================================================================================================
 
 def _create_capabilities_section() -> Section:
     """
@@ -140,6 +142,7 @@ def _create_capabilities_section() -> Section:
         cls="py-20 bg-base-200",
     )
 
+# ==================================================================================================
 
 def _create_how_it_works_section() -> Section:
     """
@@ -179,6 +182,7 @@ def _create_how_it_works_section() -> Section:
         cls="py-20 bg-base-100",
     )
 
+# ==================================================================================================
 
 def create_landing_page(
     role: Role = Role.UNAUTHENTICATED,
@@ -214,3 +218,5 @@ def create_landing_page(
         role=role,
         contained=False,
     )
+
+# ==================================================================================================

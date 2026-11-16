@@ -1,18 +1,17 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/collaborate/routes.py
+# ==================================================================================================
+
 from fasthtml.common import FT
 from starlette.requests import Request
 from starlette.responses import Response
@@ -22,6 +21,7 @@ from .partials import create_collaborate_form_partial
 from .schemas import CollaborateForm
 from ...shared import html_response, role_for_display, parse_form
 
+# ==================================================================================================
 
 @role_for_display
 async def collaborate_get(request: Request, role: Role) -> FT:
@@ -50,6 +50,7 @@ async def collaborate_get(request: Request, role: Role) -> FT:
     """
     return create_collaborate_page(role=role)
 
+# ==================================================================================================
 
 @parse_form(CollaborateForm)
 async def collaborate_post(request: Request, form: CollaborateForm) -> Response:
@@ -109,3 +110,5 @@ async def collaborate_post(request: Request, form: CollaborateForm) -> Response:
     return html_response(
         create_collaborate_form_partial(success=True)
     )
+
+# ==================================================================================================

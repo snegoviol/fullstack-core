@@ -1,24 +1,24 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/users/components.py
+# ==================================================================================================
+
 from datetime import datetime
 from fasthtml.common import Div, Span, Button, H3, P, Select, Option, FT
 from postgres_lib import Role
 from ...shared import create_icon
 from ...config import RoutePath
 
+# ==================================================================================================
 
 _ALL_ROLES = [Role.USER, Role.MODERATOR, Role.ADMIN]
 
@@ -34,6 +34,7 @@ _ROLE_BADGE_STYLES: dict[Role, str] = {
     Role.ADMIN: "badge badge-primary",
 }
 
+# ==================================================================================================
 
 def _create_role_badge(role: Role) -> Span:
     """
@@ -54,6 +55,7 @@ def _create_role_badge(role: Role) -> Span:
         cls=_ROLE_BADGE_STYLES[role],
     )
 
+# ==================================================================================================
 
 def _create_user_header(email: str, role: Role) -> Div:
     """
@@ -85,6 +87,7 @@ def _create_user_header(email: str, role: Role) -> Div:
         cls="flex items-center justify-between",
     )
 
+# ==================================================================================================
 
 def _create_user_metadata(
     user_id: int,
@@ -130,6 +133,7 @@ def _create_user_metadata(
         cls="flex gap-4 mt-2",
     )
 
+# ==================================================================================================
 
 def _create_role_select(user_id: int, current_role: Role) -> Div:
     """
@@ -174,6 +178,7 @@ def _create_role_select(user_id: int, current_role: Role) -> Div:
         cls="w-48",
     )
 
+# ==================================================================================================
 
 def _create_action_buttons(user_id: int) -> Div:
     """
@@ -198,6 +203,7 @@ def _create_action_buttons(user_id: int) -> Div:
         ),
     )
 
+# ==================================================================================================
 
 def _create_confirmation_modal(user_id: int) -> Div:
     """
@@ -283,6 +289,7 @@ def _create_confirmation_modal(user_id: int) -> Div:
         cls="modal",
     )
 
+# ==================================================================================================
 
 def create_user_card(
     user_id: int,
@@ -347,3 +354,5 @@ def create_user_card(
             ),
         },
     )
+
+# ==================================================================================================

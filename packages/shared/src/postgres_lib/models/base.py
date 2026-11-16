@@ -1,26 +1,25 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Originally from Backend Core
-# https://github.com/Sierra-Arn/backend-core
-# Modified for Full-Stack Core
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Originally from Backend Core (https://github.com/snegoviol/backend-core).
+# Modified for Full-Stack Core to suit the needs of this project.
+# 
+# ==================================================================================================
 # packages/shared/src/postgres_lib/models/base.py
+# ==================================================================================================
+
 from datetime import datetime
 from sqlalchemy import Integer, DateTime, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
+# ==================================================================================================
 
 class Base(DeclarativeBase):
     """
@@ -58,3 +57,5 @@ class Base(DeclarativeBase):
         server_default=func.now(),
         comment="Record creation timestamp",
     )
+
+# ==================================================================================================

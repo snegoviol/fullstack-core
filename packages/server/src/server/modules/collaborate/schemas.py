@@ -1,21 +1,21 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/modules/collaborate/schemas.py
+# ==================================================================================================
+
 from dataclasses import dataclass
 from ...shared import EmailFieldMixin
 
+# ==================================================================================================
 
 @dataclass
 class CollaborateForm(EmailFieldMixin):
@@ -45,6 +45,8 @@ class CollaborateForm(EmailFieldMixin):
     company: str = ""
     message: str = ""
 
+    # ----------------------------------------------------------------------------------------------
+
     def __post_init__(self) -> None:
         """
         Run normalization for the inherited email mixin and local fields.
@@ -53,6 +55,8 @@ class CollaborateForm(EmailFieldMixin):
         self.name = self.name.strip()
         self.company = self.company.strip()
         self.message = self.message.strip()
+
+    # ----------------------------------------------------------------------------------------------
 
     @property
     def has_name(self) -> bool:
@@ -66,6 +70,8 @@ class CollaborateForm(EmailFieldMixin):
         """
         return bool(self.name)
 
+    # ----------------------------------------------------------------------------------------------
+
     @property
     def has_message(self) -> bool:
         """
@@ -77,6 +83,8 @@ class CollaborateForm(EmailFieldMixin):
             True when the message field is non-empty after normalization.
         """
         return bool(self.message)
+
+    # ----------------------------------------------------------------------------------------------
 
     @property
     def optional_company(self) -> str | None:
@@ -90,3 +98,5 @@ class CollaborateForm(EmailFieldMixin):
             after normalization.
         """
         return self.company or None
+
+# ==================================================================================================

@@ -1,23 +1,23 @@
-# Copyright (c) 2026 Ilya Snegov (aka Sierra Arn)
-
+# ==================================================================================================
+# 
+# Copyright (c) 2026 Ilya Snegov
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# 
+# http://www.apache.org/licenses/LICENSE-2.0
+# 
+# ==================================================================================================
 # packages/server/src/server/shared/ui/error_page.py
+# ==================================================================================================
+
 from fasthtml.common import Div, H1, H2, P, A, FT
 from postgres_lib import Role
 from .layout import create_layout
 from ...config import RoutePath
 
+# ==================================================================================================
 
 def _create_error_heading(status_code: int) -> H1:
     """
@@ -39,6 +39,7 @@ def _create_error_heading(status_code: int) -> H1:
         cls="text-8xl font-bold text-primary mb-4",
     )
 
+# ==================================================================================================
 
 def _create_error_title(title: str) -> H2:
     """
@@ -59,6 +60,7 @@ def _create_error_title(title: str) -> H2:
         cls="text-2xl font-semibold text-base-content mb-4",
     )
 
+# ==================================================================================================
 
 def _create_error_detail(detail: str) -> P:
     """
@@ -80,6 +82,7 @@ def _create_error_detail(detail: str) -> P:
         cls="text-base-content/60 mb-8 max-w-md text-center",
     )
 
+# ==================================================================================================
 
 def _create_landing_link() -> A:
     """
@@ -96,6 +99,7 @@ def _create_landing_link() -> A:
         cls="btn btn-primary",
     )
 
+# ==================================================================================================
 
 def _create_error_content(
     status_code: int,
@@ -134,6 +138,7 @@ def _create_error_content(
         cls="flex justify-center items-center min-h-[70vh]",
     )
 
+# ==================================================================================================
 
 def create_error_page(
     status_code: int,
@@ -175,3 +180,5 @@ def create_error_page(
         title=f"{status_code} {title}",
         role=role,
     )
+
+# ==================================================================================================
