@@ -25,7 +25,7 @@
     ================================================================================================
 -->
 
-## Project Structure
+## Project Structure at a Glance
 
 ```sh
 fullstack-core/
@@ -105,13 +105,14 @@ fullstack-core/
 
 ### I. Prerequisites
 
-| Component            | Requirement                               |
-| :------------------- | :---------------------------------------- |
-| **Operating System** | GNU/Linux-based system                    |
-| **Architecture**     | `x86_64`                                  |
-| **Package Manager**  | [`Pixi`](https://pixi.prefix.dev/latest/) |
-| **Container Tools**  | [Docker and Docker Compose](https://docs.docker.com/engine/install/) |
-| **GPU**              | NVIDIA GPU with a driver supporting CUDA `>= 12.8` |
+| **Category** | **Component**               | **Requirement**                        |
+| :----------- | :-------------------------- | :------------------------------------- |
+| **Hardware** | **CPU**                     | Supports `x86_64` architecture         |
+|              | **GPU**                     | Supports `NVIDIA CUDA`                 |
+| **Software** | **Operating System**        | `GNU/Linux`-based                      |
+|              | **NVIDIA Driver**           | Supports `NVIDIA CUDA Toolkit >= 12.8` |
+|              | **Package Management Tool** | [`Pixi`](https://pixi.prefix.dev/latest/#installation) |
+|              | **Container Tool**          | [`Docker`](https://docs.docker.com/engine/install/) |
 
 > **Note: on these prerequisites**  
 > These are not strict requirements, but rather the baseline environment where the code is 
